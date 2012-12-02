@@ -12,11 +12,15 @@ define(['lib/jrsi'], function (Class) {
         sub: function (vec) {
             return new vector2d(this.x - vec.y, this.y - vec.y);
         },
+        dot: function (vec) {
+            return this.x * vec.x + this.y * vec.y;
+        },
         scale: function (scalar) {
             return new vector2d(this.x * scalar, this.y * scalar);
         },
-        dot: function (vec) {
-            return this.x * vec.x + this.y * vec.y;
+        unit: function () {
+            var len = Math.sqrt(this.x * this.x + this.y * this.y);
+            return new vector2d(this.x / len, this.y / len);
         },
         len: function () {
             return Math.sqrt(this.x * this.x + this.y * this.y);
@@ -33,6 +37,11 @@ define(['lib/jrsi'], function (Class) {
         sscale: function (scalar) {
             this.x *=  scalar;
             this.y *=  scalar;
+        },
+        sunit: function () {
+            var len = Math.sqrt(this.x * this.x + this.y * this.y);
+            this.x /= len;
+            this.y /= len;
         }
     });
     
