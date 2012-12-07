@@ -29,7 +29,10 @@ define(['lib/jrsi'], function (Class) {
         },
         unit: function () {
             var len = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
-            return new vector3d(this.x / len, this.y / len, this.z / len);
+            if (len > 0.0) 
+                return new vector3d(this.x / len, this.y / len, this.z / len);
+            else 
+                return new vector3d(0.0, 0.0, 0.0);
         },
         len: function () {
             return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
@@ -52,9 +55,11 @@ define(['lib/jrsi'], function (Class) {
         },
         sunit: function () {
             var len = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
-            this.x /= len;
-            this.y /= len;
-            this.z /= len;
+            if (len > 0.0) {
+                this.x /= len;
+                this.y /= len;
+                this.z /= len;
+            }
         }
     });
     
