@@ -66,8 +66,53 @@ define(['lib/jrsi'], function (Class) {
                 this.y /= len;
                 this.z /= len;
             }
+        },
+        
+        fromSpher: function (phi, theta, r) {
+            this.x = r * Math.cos(phi) * Math.sin(theta);
+            this.y = r * Math.sin(phi) * Math.sin(theta);
+			this.z = r * Math.cos(theta);
+		},
+		fromSpherDeg: function (phi, theta, r) {
+			phi   *= Math.PI / 180.0;
+			theta *= Math.PI / 180.0;
+			this.x = r * Math.cos(phi) * Math.sin(theta);
+			this.y = r * Math.sin(phi) * Math.sin(theta);
+			this.z = r * Math.cos(theta);
+		},
+        toSpher: function () {            
+            var spher = {};
+            spher.r = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+            spher.phi = Math.atan2(this.y, this.x);
+            spher.theta = Math.acos(this.z / spher.r);
+            return spher;
+        },
+        toSpherDeg: function () {            
+            var spher = {};
+            spher.r = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+            spher.phi = Math.atan2(this.y, this.x) * 180.0 / Math.PI;
+            spher.theta = Math.acos(this.z / spher.r) * 180.0 / Math.PI;
+            if (spher.phi < 0.0) spher.phi += 360.0; 
+            return spher;
         }
     });
+    
+    vector3d.spher = function(phi, theta, r) {
+		return new vector3d(
+			r * Math.cos(phi) * Math.sin(theta),
+			r * Math.sin(phi) * Math.sin(theta),
+			r * Math.cos(theta)
+		);
+	};
+    vector3d.spherDeg = function(phi, theta, r) {
+		phi   *= Math.PI / 180.0;
+		theta *= Math.PI / 180.0;
+		return new vector3d(
+			r * Math.cos(phi) * Math.sin(theta),
+			r * Math.sin(phi) * Math.sin(theta),
+			r * Math.cos(theta)
+		);
+	};
     
     return vector3d;
 });
