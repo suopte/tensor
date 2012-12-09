@@ -5,4 +5,5 @@ The name comes from the fact that tensors are generalization of both vectors and
 
 ###AMD (RequireJS) compatibility
 
-Classes defined as RequireJS modules to be available both from browser and node.js scrips.
+Classes defined as modules to be available from both browser and node.js scrips.
+For AMD (Asynchronous Module Definition) compatibility [RequireJS](http://requirejs.org/) is used.
