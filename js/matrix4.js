@@ -44,7 +44,7 @@ define(['lib/jrsi', 'vector3d'], function (Class, vector3d) {
         }
     });
     
-    matrix4.translate = function (vec) {
+    matrix4.translation = function (vec) {
         return new matrix4([[1.0, 0.0, 0.0, vec.x],
                             [0.0, 1.0, 0.0, vec.y],
                             [0.0, 0.0, 1.0, vec.z],
@@ -63,7 +63,7 @@ define(['lib/jrsi', 'vector3d'], function (Class, vector3d) {
                             [u.y, v.y, w.y, 0.0],
                             [u.z, v.z, w.z, 0.0],
                             [0.0, 0.0, 0.0, 1.0]]);
-        return mat.mul(matrix4.translate(eye.scale(-1.0)))
+        return mat.mul(matrix4.translation(eye.scale(-1.0)))
     }
     
     matrix4.perspective = function (fov, aspect, fp, bp) {
