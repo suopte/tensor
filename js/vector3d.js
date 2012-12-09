@@ -1,13 +1,19 @@
 define(['lib/jrsi'], function (Class) {
     var vector3d = Class.extend({
-       x: 0.0,
-       y: 0.0,
-       z: 0.0,
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+        
         init: function (ax, ay, az) {
             this.x = ax;
             this.y = ay;
             this.z = az;
         },
+        
+        toString: function () {
+            return '(' + this.x + ', ' + this.y + ', ' + this.z + ')';
+        },
+        
         add: function (vec) {
             return new vector3d(this.x + vec.x, this.y + vec.y, this.z + vec.z);
         },

@@ -2,10 +2,16 @@ define(['lib/jrsi'], function (Class) {
     var vector2d = Class.extend({
         x: 0.0,
         y: 0.0,
+        
         init: function (ax, ay) {
             this.x = ax;
             this.y = ay;
         },
+        
+        toString: function () {
+            return '(' + this.x + ', ' + this.y + ')';
+        },
+        
         add: function (vec) {
             return new vector2d(this.x + vec.x, this.y + vec.y);
         },
