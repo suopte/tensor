@@ -67,16 +67,16 @@ define(['lib/jrsi', 'vector3d'], function (Class, vector3d) {
     }
     
     matrix4.perspective = function (fov, aspect, fp, bp) {
-        var slopey = Math.tan(fov * Math.PI / 180.0),
+        var slopey = Math.tan(fov * Math.PI / 360.0),
             m00 = 1.0 / slopey / aspect,
             m11 = 1.0 / slopey,
             m22 = -(fp + bp) / (bp - fp),
-            m32 = -2.0 * fp * bp / (bp - fp);
+            m23 = -2.0 * fp * bp / (bp - fp);
             
             return new matrix4([[m00, 0.0, 0.0, 0.0],
                                 [0.0, m11, 0.0, 0.0],
-                                [0.0, 0.0, m22, -1.0],
-                                [0.0, 0.0, m32, 0.0]]);
+                                [0.0, 0.0, m22, m23],
+                                [0.0, 0.0, -1.0, 0.0]]);
     }
     
     return matrix4;
