@@ -44,5 +44,40 @@ define(['lib/jrsi', 'vector3d'], function (Class, vector3d) {
         }
     });
     
+    matrix4.translate = function (vec) {
+        return new matrix4([[1.0, 0.0, 0.0, vec.x],
+                            [0.0, 1.0, 0.0, vec.y],
+                            [0.0, 0.0, 1.0, vec.z],
+                            [0.0, 0.0, 0.0, 1.0]]);
+    }
+    
+    matrix4.lookAt = function (eye, lookat, up) {
+        var u, v, w, mat;
+        w = new vector3d(eye.x - lookat.x, eye.y - lookat.y, eye.z - lookat.z);
+        w.sunit();
+        u = up.cross(w);
+        u.sunit();
+        v = w.cross(u);
+        
+        mat = new matrix4([[u.x, v.x, w.x, 0.0],
+                            [u.y, v.y, w.y, 0.0],
+                            [u.z, v.z, w.z, 0.0],
+                            [0.0, 0.0, 0.0, 1.0]]);
+        return mat.mul(matrix4.translate(eye.scale(-1.0)))
+    }
+    
+    matrix4.perspective = function (fov, aspect, fp, bp) {
+        var slopey = Math.tan(fov * Math.PI / 180.0),
+            m00 = 1.0 / slopey / aspect,
+            m11 = 1.0 / slopey,
+            m22 = -(fp + bp) / (bp - fp),
+            m32 = -2.0 * fp * bp / (bp - fp);
+            
+            return new matrix4([[m00, 0.0, 0.0, 0.0],
+                                [0.0, m11, 0.0, 0.0],
+                                [0.0, 0.0, m22, -1.0],
+                                [0.0, 0.0, m32, 0.0]]);
+    }
+    
     return matrix4;
 });
