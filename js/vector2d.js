@@ -16,7 +16,7 @@ define(['lib/jrsi'], function (Class) {
             return new vector2d(this.x + vec.x, this.y + vec.y);
         },
         sub: function (vec) {
-            return new vector2d(this.x - vec.y, this.y - vec.y);
+            return new vector2d(this.x - vec.x, this.y - vec.y);
         },
         dot: function (vec) {
             return this.x * vec.x + this.y * vec.y;
